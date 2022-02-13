@@ -17,44 +17,50 @@ class CalculatorFluent extends StatelessWidget {
       child: FluentApp(
         debugShowCheckedModeBanner: false,
         title: 'Calculator',
-        theme: ThemeData(
-          accentColor: SystemTheme.accentInstance.accent.toAccentColor(),
-          scaffoldBackgroundColor: Colors.transparent,
-          brightness: Brightness.dark,
-          // acrylicBackgroundColor: Colors.magenta,
-        ),
-        home: ScaffoldPage(
-          header: Container(
-            height: 38,
-            // color: Colors.blue,
-            alignment: Alignment.topLeft,
-            child: MoveWindow(
-              child: SizedBox(
+        home: Builder(builder: (context) {
+          return FluentTheme(
+            data: ThemeData(
+              accentColor: SystemTheme.accentInstance.accent.toAccentColor(),
+              scaffoldBackgroundColor: Colors.transparent,
+
+              brightness: Brightness.dark,
+              // acrylicBackgroundColor: Colors.magenta,
+            ),
+            child: ScaffoldPage(
+              padding: EdgeInsets.zero,
+              header: Container(
                 height: 38,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Title'),
-                    Spacer(),
-                    Tooltip(
-                      message: 'minimize',
-                      child: MinimizeWindowButton(),
+                color: SystemTheme.accentInstance.accent.toAccentColor(),
+                alignment: Alignment.topLeft,
+                child: MoveWindow(
+                  child: SizedBox(
+                    height: 38,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Title'),
+                        Spacer(),
+                        Tooltip(
+                          message: 'minimize',
+                          child: MinimizeWindowButton(),
+                        ),
+                        Tooltip(
+                          message: 'maximize',
+                          child: MaximizeWindowButton(),
+                        ),
+                        Tooltip(
+                          message: 'close',
+                          child: CloseWindowButton(),
+                        ),
+                      ],
                     ),
-                    Tooltip(
-                      message: 'maximize',
-                      child: MaximizeWindowButton(),
-                    ),
-                    Tooltip(
-                      message: 'close',
-                      child: CloseWindowButton(),
-                    ),
-                  ],
+                  ),
                 ),
               ),
+              content: _Content(),
             ),
-          ),
-          content: _Content(),
-        ),
+          );
+        }),
       ),
     );
   }
@@ -74,8 +80,8 @@ class _ContentState extends State<_Content> {
 
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       flutter_acrylic.Window.setEffect(
-        effect: flutter_acrylic.WindowEffect.aero,
-        color: FluentTheme.of(context).micaBackgroundColor.withOpacity(0.2),
+        effect: flutter_acrylic.WindowEffect.acrylic,
+        color: FluentTheme.of(context).acrylicBackgroundColor.withOpacity(0.5),
         dark: true,
       );
       // setState(() {});

@@ -17,20 +17,31 @@ class ResultView extends StatelessWidget {
         child: BlocBuilder<CalculatorCubit, CalculatorData>(
           builder: (context, state) {
             return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(state.result.toString(),
-                      style: Theme.of(context).textTheme.displaySmall),
-                  const SizedBox(height: 10),
-                  Text(state.operation?.toText() ?? '',
-                      style: Theme.of(context).textTheme.bodyMedium),
-                  const SizedBox(height: 10),
-                  Text(state.value.toString(),
-                      style: Theme.of(context).textTheme.displaySmall),
-                ],
+              padding: const EdgeInsets.all(18.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      state.result.toString(),
+                      style:
+                          Theme.of(context).textTheme.displayMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      state.operation?.toText() ?? '',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      state.value.toString(),
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                  ],
+                ),
               ),
             );
           },
