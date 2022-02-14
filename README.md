@@ -1,12 +1,25 @@
 # jakarta_suite
 
-A new Flutter project.
 
 ## Getting Started
 
 Jakarta Suite is a flutter project that create apps to use system settings from native platform
 
-## Calculator
+## Target Platform
+
+- Windows
+- Android
+- ios
+- macOS
+- web
+- Linux (Gnome & KDE)
+
+## Apps 
+- Calculator
+- Converter
+- Weather
+
+### Calculator
 
 On Windows 10 :
 
