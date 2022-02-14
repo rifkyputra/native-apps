@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:jakarta_suite/app_theme/theme1.dart';
 import 'package:jakarta_suite/calculator/cubit/calculator_cubit.dart';
 
 class ResultView extends StatelessWidget {
@@ -11,8 +12,8 @@ class ResultView extends StatelessWidget {
     return Container(
         alignment: Alignment.bottomRight,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-        ),
+            // color: Theme.of(context).colorScheme.secondary,
+            ),
         margin: const EdgeInsets.only(bottom: 23),
         child: BlocBuilder<CalculatorCubit, CalculatorData>(
           builder: (context, state) {
@@ -25,20 +26,17 @@ class ResultView extends StatelessWidget {
                   children: [
                     Text(
                       state.result.toString(),
-                      style:
-                          Theme.of(context).textTheme.displayMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
+                      style: themeLight.textTheme.heading.medium,
                     ),
                     const SizedBox(height: 10),
                     Text(
                       state.operation?.toText() ?? '',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: themeLight.textTheme.heading.medium,
                     ),
                     const SizedBox(height: 10),
                     Text(
                       state.value.toString(),
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: themeLight.textTheme.heading.medium,
                     ),
                   ],
                 ),
@@ -58,6 +56,7 @@ class CalcButton extends StatelessWidget {
     return Center(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 500),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: StaggeredGrid.count(
           crossAxisCount: 5,
           crossAxisSpacing: 5,
@@ -66,7 +65,7 @@ class CalcButton extends StatelessWidget {
             PadButton(
               onTap: () => context.read<CalculatorCubit>().delete(),
               text: "C",
-              color: Colors.red,
+              color: Theme.of(context).colorScheme.surface,
             ),
             PadButton(
               onTap: () => context.read<CalculatorCubit>().power(),
@@ -140,7 +139,7 @@ class CalcButton extends StatelessWidget {
             PadButton(
               onTap: () => context.read<CalculatorCubit>().result(),
               text: "=",
-              color: Theme.of(context).colorScheme.error,
+              color: Theme.of(context).colorScheme.secondary,
               y: 2,
             ),
             PadButton(

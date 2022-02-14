@@ -1,6 +1,7 @@
 import 'package:adwaita/adwaita.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jakarta_suite/app_theme/theme1.dart';
 import 'package:jakarta_suite/calculator/cubit/calculator_cubit.dart';
 import 'package:libadwaita/libadwaita.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -14,17 +15,11 @@ class CalculatorAdw extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: AdwaitaThemeData.dark(),
-      darkTheme: AdwaitaThemeData.dark(),
+      theme: themeLight.themeData,
+      darkTheme: themeDark.combineThemeData(AdwaitaThemeData.dark()),
       home: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // AdwHeaderBar.bitsdojo(
-          //   appWindow: appWindow,
-          //   title: Text('hsdkfh'),
-          //   closeBtn: Icon(Icons.close),
-          //   windowDecor: (String name, type, void Function()? onPressed) {  },
-          // ),
           AdwHeaderBar.bitsdojo(
             appWindow: appWindow,
             start: [
@@ -41,7 +36,7 @@ class CalculatorAdw extends StatelessWidget {
                 icon: const Icon(Icons.nightlight_round, size: 15),
               ),
             ],
-            title: const Text('Libadwaita Demo'),
+            title: const Text('Calculator'),
             end: [
               AdwPopupMenu(
                 body: Column(
@@ -77,7 +72,6 @@ class CalculatorAdw extends StatelessWidget {
               ),
             ],
             windowDecor: (String name, type, void Function()? onPressed) {
-              // return CloseWindowButton();
               switch (name) {
                 case 'close':
                   return CloseWindowButton();
@@ -95,9 +89,6 @@ class CalculatorAdw extends StatelessWidget {
                 ],
               );
             },
-            // windowDecor: (String name, type, void Function()? onPressed) {
-            //   return Text('sss');
-            // },
           ),
           BlocProvider(
             create: (context) => CalculatorCubit(),
@@ -118,12 +109,15 @@ class CalculatorAdwHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ResultView(),
-          CalcButton(),
-        ]);
+    return Container(
+      color: Theme.of(context).colorScheme.background,
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: ResultView()),
+            CalcButton(),
+          ]),
+    );
   }
 }

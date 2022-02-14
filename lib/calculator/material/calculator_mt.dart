@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jakarta_suite/app_theme/theme1.dart';
 import 'package:jakarta_suite/calculator/cubit/calculator_cubit.dart';
 
 import '../shared/parts.dart';
@@ -10,6 +11,9 @@ class CalculatorMt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themeLight.themeData,
+      darkTheme: themeDark.themeData,
       home: BlocProvider(
         create: (context) => CalculatorCubit(),
         child: Scaffold(
@@ -25,12 +29,13 @@ class CalculatorMtHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return SafeArea(
       child: Column(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ResultView(),
+          children: const [
+            Expanded(child: ResultView()),
             CalcButton(),
           ]),
     );
